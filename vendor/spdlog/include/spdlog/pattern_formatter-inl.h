@@ -4,14 +4,14 @@
 #pragma once
 
 #ifndef SPDLOG_HEADER_ONLY
-#    include <spdlog/pattern_formatter.h>
+#    include "pattern_formatter.h"
 #endif
 
-#include <spdlog/details/fmt_helper.h>
-#include <spdlog/details/log_msg.h>
-#include <spdlog/details/os.h>
-#include <spdlog/fmt/fmt.h>
-#include <spdlog/formatter.h>
+#include "details/fmt_helper.h"
+#include "details/log_msg.h"
+#include "details/os.h"
+#include "fmt/fmt.h"
+#include "formatter.h"
 
 #include <algorithm>
 #include <array>
@@ -1398,7 +1398,7 @@ SPDLOG_INLINE void pattern_formatter::compile_pattern_(const std::string &patter
         {
             if (user_chars) // append user chars found so far
             {
-                formatters_.push_back(std::move(user_chars));
+                formatters_.emplace_back(user_chars.release());
             }
 
             auto padding = handle_padspec_(++it, end);

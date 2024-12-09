@@ -4,7 +4,7 @@
 #pragma once
 
 #ifndef SPDLOG_HEADER_ONLY
-#    include <spdlog/details/backtracer.h>
+#    include "backtracer.h"
 #endif
 namespace spdlog {
 namespace details {

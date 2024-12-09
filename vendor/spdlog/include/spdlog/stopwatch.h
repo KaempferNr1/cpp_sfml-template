@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <spdlog/fmt/fmt.h>
+#include "fmt/fmt.h"
 #include <chrono>
 
 // Stopwatch support for spdlog  (using std::chrono::steady_clock).

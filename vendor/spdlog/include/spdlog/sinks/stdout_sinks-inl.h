@@ -4,17 +4,17 @@
 #pragma once
 
 #ifndef SPDLOG_HEADER_ONLY
-#    include <spdlog/sinks/stdout_sinks.h>
+#    include "stdout_sinks.h"
 #endif
 
-#include <spdlog/details/console_globals.h>
-#include <spdlog/pattern_formatter.h>
+#include "../details/console_globals.h"
+#include "../pattern_formatter.h"
 #include <memory>
 
 #ifdef _WIN32
 // under windows using fwrite to non-binary stream results in \r\r\n (see issue #1675)
 // so instead we use ::FileWrite
-#    include <spdlog/details/windows_include.h>
+#    include "../details/windows_include.h"
 
 #    ifndef _USING_V110_SDK71_ // fileapi.h doesn't exist in winxp
 #        include <fileapi.h>   // WriteFile (..)

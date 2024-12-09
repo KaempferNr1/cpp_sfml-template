@@ -10,8 +10,8 @@
 #    error "include udp_client-windows.h instead"
 #endif
 
-#include <spdlog/common.h>
-#include <spdlog/details/os.h>
+#include "../common.h"
+#include "os.h"
 #include <cstring>
 #include <sys/socket.h>
 #include <netinet/in.h>

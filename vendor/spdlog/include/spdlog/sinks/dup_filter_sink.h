@@ -4,8 +4,8 @@
 #pragma once
 
 #include "dist_sink.h"
-#include <spdlog/details/null_mutex.h>
-#include <spdlog/details/log_msg.h>
+#include "../details/null_mutex.h"
+#include "../details/log_msg.h"
 
 #include <cstdio>
 #include <mutex>

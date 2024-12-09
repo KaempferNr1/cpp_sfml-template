@@ -1,14 +1,23 @@
 -- premake5.lua
-workspace "cpp_sfml-template"
+workspace "cpp_sfml_template"
    architecture "x64"
    configurations { "Debug", "Release", "Dist" }
-   startproject "cpp_sfml-template"
+   startproject "cpp_sfml_template"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["glm"] = "vendor/glm"
 IncludeDir["spd_log"] = "vendor/spdlog/include"
-IncludeDir["sfml"] = "vendor/SFML/SFML-2.6.0/include"
+IncludeDir["SFML"] = "vendor/SFML/SFML-2.6.2/include"
+IncludeDir["ImGui"] = "vendor/imgui"
 
-include "cpp_sfml-template"
+
+
+
+group "Dependencies"
+	include "Vendor/imgui"
+group ""
+
+include "cpp_sfml_template"
+

@@ -17,8 +17,8 @@
 #        define FMT_HEADER_ONLY
 #    endif
 
-#    include <spdlog/fmt/bundled/core.h>
-#    include <spdlog/fmt/bundled/format.h>
+#    include "bundled/core.h"
+#    include "bundled/format.h"
 
 #else // SPDLOG_FMT_EXTERNAL is defined - use external fmtlib
 #    include <fmt/core.h>

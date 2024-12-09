@@ -10,10 +10,10 @@
 // http://mongocxx.org/mongocxx-v3/installation/
 //
 
-#include "spdlog/common.h"
-#include "spdlog/details/log_msg.h"
-#include "spdlog/sinks/base_sink.h"
-#include <spdlog/details/synchronous_factory.h>
+#include "../common.h"
+#include "../details/log_msg.h"
+#include "base_sink.h"
+#include "../details/synchronous_factory.h"
 
 #include <bsoncxx/builder/stream/document.hpp>
 #include <bsoncxx/types.hpp>
