@@ -32,8 +32,7 @@ int Main(int argc, char** argv)
     Log::init(LOG_LEVEL_INFO,LOG_LEVEL_INFO);
     Random::init();
 
-	sf::Event event{};
-    sf::RenderWindow window(sf::VideoMode(720, 480), "window", sf::Style::Close);
+    sf::RenderWindow window(sf::VideoMode({720, 480}), "window", sf::Style::Close);
 
     if (!init_sfml_imgui(window))
     {
@@ -45,17 +44,14 @@ int Main(int argc, char** argv)
 
     while (window.isOpen())
     {
-        while (window.pollEvent(event))
+        while (const auto& event = window.pollEvent())
         {
-            ImGui::SFML::ProcessEvent(window, event);
-            switch (event.type)
+            ImGui::SFML::ProcessEvent(window, *event);
+            if(event->is<sf::Event::Closed>())
             {
-            case sf::Event::Closed:
-                window.close();
-                break;
-            default:
-                break;
+	            window.close();
             }
+
         }
         ImGui::SFML::Update(window, delta_clock.restart());
 
@@ -80,8 +76,8 @@ bool init_sfml_imgui(sf::RenderWindow& window)
     if (!ImGui::SFML::Init(window, false))
         return false;
 
-    ImGui::SFML::ProcessEvent(window, sf::Event{ sf::Event::LostFocus,{} });
-    ImGui::SFML::ProcessEvent(window, sf::Event{ sf::Event::GainedFocus,{} });
+    ImGui::SFML::ProcessEvent(window, sf::Event::FocusLost());
+    ImGui::SFML::ProcessEvent(window, sf::Event::FocusGained());
 
     ImGuiIO& io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls

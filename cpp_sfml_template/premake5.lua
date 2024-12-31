@@ -20,19 +20,15 @@ project "cpp_sfml_template"
    }
    defines {"SFML_STATIC"}
  
-   libdirs { "../vendor/SFML/SFML-2.6.2/lib" }
+   libdirs { "../vendor/SFML/SFML-3.0.0/lib" }
 
     links
 	{
         "imgui",
-		"freetype",
 		--"winmm",
 		--"gdi32",
        -- "flac",
-		"vorbisenc",
-		"vorbisfile",
-		"vorbis",
-		"ogg",
+
 
     }
 
@@ -40,16 +36,14 @@ project "cpp_sfml_template"
    objdir ("../bin-int/" .. outputdir .. "/%{prj.name}")
 
    filter "action:vs*"
-        buildoptions { "/Zc:__cplusplus" }
+        buildoptions { "/Zc:__cplusplus" }  -- Ensure correct __cplusplus definition
 
    filter "system:windows"
       systemversion "latest"
-      defines { "PLATFORM_WINDOWS" }
+      defines { "PLATFORM_WINDOWS","_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING" }
       links
       {
-          "openal32",
           "opengl32",
-          "flac",
       }
    filter "system:linux"
         links
@@ -68,12 +62,20 @@ project "cpp_sfml_template"
       if WINDOWS then
         links
         {	
+          "FLACd",
+          "freetyped",		
+          "oggd",
+          "vorbisencd",
+		  "vorbisfiled",
+		  "vorbisd",
           "sfml-graphics-s-d",
           "sfml-window-s-d",
           "sfml-system-s-d",
           "sfml-audio-s-d",
           "sfml-network-s-d"
         }
+        libdirs { "../vendor/SFML/SFML-3.0.0/lib/Debug" }
+
       end   
 
 
@@ -85,11 +87,17 @@ project "cpp_sfml_template"
       if WINDOWS then
         links
         {	
+          "FLAC",
+          "freetype",
+          "ogg",
+          "vorbisenc",
+		  "vorbisfile",
+		  "vorbis",
           "sfml-graphics-s",
           "sfml-window-s",
           "sfml-system-s",
           "sfml-audio-s",
-          "sfml-network-s"
+          "sfml-network-s",
         }
       end  
       runtime "Release"
@@ -101,7 +109,13 @@ project "cpp_sfml_template"
       defines { "DIST" }
       if WINDOWS then
         links
-        {	
+        {
+          "FLAC",
+          "freetype",
+          "ogg",
+          "vorbisenc",
+		  "vorbisfile",
+		  "vorbis",
           "sfml-graphics-s",
           "sfml-window-s",
           "sfml-system-s",
