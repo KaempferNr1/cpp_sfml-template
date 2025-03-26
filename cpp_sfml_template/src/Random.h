@@ -2,6 +2,8 @@
 #include <random>
 
 #include <glm/glm.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <SFML/System/Vector3.hpp>
 
 class Random
 {
@@ -9,15 +11,6 @@ public:
 	static void init()
 	{
 		s_random_engine.seed(std::random_device()());
-	}
-
-	[[nodiscard]] static bool foo(const double probality)
-	{
-		if (probality >= 1)
-			return true;
-
-		std::bernoulli_distribution distribution(probality);
-		return distribution(s_random_engine);
 	}
 
 	[[nodiscard]] static uint32_t uint()
@@ -40,6 +33,21 @@ public:
 		return floating() * (max - min) + min;
 	}
 
+	[[nodiscard]] static sf::Vector2f vec2()
+	{
+		return { floating(), floating() };
+	}
+
+	[[nodiscard]] static sf::Vector2f vec2(const float min, const float max)
+	{
+		return { floating(min,max),floating(min,max) };
+	}
+
+	[[nodiscard]] static sf::Vector2f vec2_in_unit_sphere()
+	{
+		return vec2(-1.0f, 1.0f).normalized();
+	}
+
 	[[nodiscard]] static glm::vec3 vec3()
 	{
 		return { floating(), floating(), floating() };
@@ -50,10 +58,11 @@ public:
 		return { floating(min,max), floating(min,max), floating(min,max) };
 	}
 
-	[[nodiscard]] static glm::vec3 in_unit_sphere()
+	[[nodiscard]] static glm::vec3 vec3_in_unit_sphere()
 	{
 		return glm::normalize(vec3(-1.0f, 1.0f));
 	}
+
 private:
 	thread_local static std::mt19937 s_random_engine;
 

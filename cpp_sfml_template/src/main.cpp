@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 
 int Main(int argc, char** argv)
 {
-    Log::init(LOG_LEVEL_INFO,LOG_LEVEL_INFO);
+    Log::init(LOG_LEVEL_INFO);
     Random::init();
 
     sf::RenderWindow window(sf::VideoMode({720, 480}), "window", sf::Style::Close);
